@@ -13,7 +13,7 @@ services:
 # ..... Traefik et autres applications
 
   hatunnel:
-    image: diyfr/home-assistant-tunnel:latest
+    image: diyfr/hass-tunnel:latest
     container_name: hatunnel
     networks:
       - traefik
