@@ -5,6 +5,8 @@
 2- Serveur distant avec docker , docker-compose et traefik   
 
 ### Serveur distant
+Nota: un [chart](./chart/) est disponible mais c'est encore du draft   
+
 #### Lancer votre backend derrière traefik
 Ajouter dans votre `docker-compose.yml`  (adaptez le chemin `/path/data/hatunnel` )
 ```yaml
