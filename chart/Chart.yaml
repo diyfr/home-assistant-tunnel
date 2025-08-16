@@ -1,4 +1,4 @@
 apiVersion: v2
 name: home-assistant-tunnel
 version: 0.0.1
-description: Draft Permet d'accéder à votre instance home assistant (ou autre application) via tunnel SSH. Configuration pour cluster k3s utilisant traefik intégré
+description: Draft Permet d'accéder à votre instance home assistant (ou autre application) via tunnel SSH. Configuration pour un cluster unique k3s utilisant traefik intégré et un stockage sur le host
