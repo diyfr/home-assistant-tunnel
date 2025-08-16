@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: "{{ .Values.prefix }}-hatunel-http"
+  namespace: "{{ .Values.namespace }}"
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: "Host(`{{ .Values.dns }}`)"
+      kind: Rule
+      services:
+        - name: "{{ .Values.prefix }}-hatunnel-http"
+          port: 8080
+  tls:
+    certResolver: myresolver
