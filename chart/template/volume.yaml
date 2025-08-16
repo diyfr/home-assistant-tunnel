@@ -5,7 +5,7 @@ metadata:
   namespace: hatunnel
 spec:
   capacity:
-    storage: 10Gi
+    storage: 100Mi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -27,5 +27,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 100Mi
   storageClassName: local-hostpath
