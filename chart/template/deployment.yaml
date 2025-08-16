@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Values.prefix }}-hatunnel-config"
+  namespace: "{{ .Values.namespace }}"
+data:
+  PUID: "1002"
+  PGID: "999"
+  USER_NAME: ""{{ .Values.username }}""
+  PASSWORD_ACCESS: "true" # Certainement à désactiver une fois la clé publique chargée..
+  TZ: "Europe/Paris"
+# il faut créer le secret kubectl create secret generic hatunnel-secret --from-literal=USER_PASSWORD="monPass" -n home-assistant
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.prefix }}-hass-tunnel"
+  namespace: "{{ .Values.namespace }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hass-tunnel
+  template:
+    metadata:
+      labels:
+        app: hass-tunnel
+    spec:
+      containers:
+      - name: hass-tunnel
+        image: diyfr/hass-tunnel:latest # TODO: peut-être préférable de fixer la version
+        ports:
+          - containerPort: 2222
+          - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: hatunnel-config
+        - secretRef:
+            name: hatunnel-secret
+        volumeMounts:
+          - name: config-data
+            mountPath: /config
+# Todo: a voir volume persistant
+      volumes:
+        - name: config-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.prefix }}-hatunnel-http"
+  namespace: "{{ .Values.namespace }}"
+spec:
+  selector:
+    app: "{{ .Values.prefix }}-hass-tunnel"
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Values.prefix }}-hatunnel-ssh"
+  namespace: "{{ .Values.namespace }}"
+spec:
+  type: LoadBalancer
+  selector:
+    app: "{{ .Values.prefix }}-hass-tunnel"
+  ports:
+    - name: ssh
+      port: 6222
+      targetPort: 2222
