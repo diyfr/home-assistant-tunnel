@@ -1,0 +1,10 @@
+replica: 1
+namespace: home-assistant
+
+username: achanger
+# Ne pas oublier de créer un mot de passe :  kubectl create secret generic hatunnel-secret --from-literal=USER_PASSWORD="monPass" -n home-assistant
+dns: your.domain.tld
+# Dans le cas de plusieurs tunnel SSH sur un seul namespace.
+prefix: h1 
+
+
