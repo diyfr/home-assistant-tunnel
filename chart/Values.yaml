@@ -7,4 +7,7 @@ dns: your.domain.tld
 # Dans le cas de plusieurs tunnel SSH sur un seul namespace.
 prefix: h1 
 
+# Chemin sur le host
+local-path:  /srv/vol/hatunnel
+
 
