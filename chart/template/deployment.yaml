@@ -40,10 +40,10 @@ spec:
         volumeMounts:
           - name: config-data
             mountPath: /config
-# Todo: a voir volume persistant
       volumes:
         - name: config-data
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: "{{ .Values.prefix }}-hatunnel-data-pvc"
 ---
 apiVersion: v1
 kind: Service
