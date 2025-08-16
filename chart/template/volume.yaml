@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hatunnel-data-pv
+  namespace: hatunnel
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-hostpath
+  hostPath:
+    path: " {{ .Values.local-path }}"
+    type: DirectoryOrCreate
+  claimRef:
+    namespace: hatunnel
+    name: hatunnel-data-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hatunnel-data-pvc
+  namespace: hatunnel
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: local-hostpath
