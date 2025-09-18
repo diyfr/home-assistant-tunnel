@@ -69,5 +69,5 @@ spec:
     app: "{{ .Values.prefix }}-hass-tunnel"
   ports:
     - name: ssh
-      port: 6222
-      targetPort: 2222
+      port: 6222 # Le port ouvert sur internet
+      targetPort: 2222 # Le port vers le pod
