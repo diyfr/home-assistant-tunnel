@@ -9,7 +9,7 @@ data:
   USER_NAME: ""{{ .Values.username }}""
   PASSWORD_ACCESS: "true" # Certainement à désactiver une fois la clé publique chargée..
   TZ: "Europe/Paris"
-# il faut créer le secret kubectl create secret generic hatunnel-secret --from-literal=USER_PASSWORD="monPass" -n home-assistant
+# il faut créer le secret kubectl create secret generic {{ .Values.prefix }}-hatunnel-secret --from-literal=USER_PASSWORD="monPass" -n home-assistant
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -34,7 +34,7 @@ spec:
           - containerPort: 8080
         envFrom:
         - configMapRef:
-            name: hatunnel-config
+            name: {{ .Values.prefix }}-hatunnel-config
         - secretRef:
             name: hatunnel-secret
         volumeMounts:
