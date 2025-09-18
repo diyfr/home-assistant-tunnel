@@ -1,4 +1,5 @@
 ### Accéder à son Home Assistant hébérgé derrière sa box Internet
+Compatible Google Assistant
 
 #### Prerequis :
 1- Home assistant installé et fonctionnel depuis votre réseau interne  
