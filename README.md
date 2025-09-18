@@ -5,9 +5,11 @@
 2- Serveur distant avec docker , docker-compose et traefik   
 
 ### Serveur distant
-Nota: un [chart](./chart/) est disponible mais c'est encore du draft   
+Nota: un [chart](./chart/) est disponible mais c'est encore du draft (fonctionne sur k3s)     
 
 #### Lancer votre backend derrière traefik
+**Nota** : Ici le port 6222 exposé internet est un choix arbitraire vous pouvez utiliser le port que vous souhaitez   
+
 Ajouter dans votre `docker-compose.yml`  (adaptez le chemin `/path/data/hatunnel` )
 ```yaml
 version: '3.7'
